@@ -167,6 +167,6 @@ person-info-query
 
 ## License
 
-Copyright © 2016 Valentin Waeselynck and contributors
+Copyright © 2019 Valentin Waeselynck and contributors
 
 Distributed under the MIT License.
