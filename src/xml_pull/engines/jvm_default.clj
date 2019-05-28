@@ -13,10 +13,10 @@
         (throw
           (if (contains? m k)
             (ex-info
-              (str "Missing key " (pr-str k) " in " (pr-str m-sym) ".")
+              (str "Invalid " (pr-str k) " in " (pr-str m-sym) ", failed predicate: " (pr-str pred-sym) ".")
               {m-sym m})
             (ex-info
-              (str "Invalid " (pr-str k) " in " (pr-str m-sym) ", failed predicate: " (pr-str pred-sym) ".")
+              (str "Missing key " (pr-str k) " in " (pr-str m-sym) ".")
               {m-sym m})))))
     (throw
       (ex-info
@@ -143,7 +143,8 @@
                                 (case (get-safe path :xml-pull.path/type keyword?)
                                   :xml-pull.path-type/attr
                                   (let [;; IMPROVEMENT more error infomation. (Val, 26 May 2019)
-                                        attr-k (get-safe path :xml-pull.path/attr keyword?)]
+                                        attr-k (keyword
+                                                 (get-safe path :xml-pull.path/attr string?))]
                                     (leaf-path-fn
                                       (fn get-attr-k [xml-tree] (-> xml-tree :attrs (get attr-k)))
                                       attr-k))
@@ -162,13 +163,16 @@
 
 
                                   :xml-pull.path-type/content-tag
-                                  (let [tag (get-safe path :xml-pull.path/tag keyword?)]
+                                  (let [tag (keyword
+                                              (get-safe path :xml-pull.path/tag string?))]
                                     (internal-path-fn tag
                                       (constantly true)
                                       tag))
                                   :xml-pull.path-type/content-tag-with-attr
-                                  (let [tag (get-safe path :xml-pull.path/tag keyword?)
-                                        attr-k (get-safe path :xml-pull.path/attr keyword?)
+                                  (let [tag (keyword
+                                              (get-safe path :xml-pull.path/tag string?))
+                                        attr-k (keyword
+                                                 (get-safe path :xml-pull.path/attr string?))
                                         attr-v (get-safe path :xml-pull.path/attr-value string?)]
                                     (internal-path-fn tag
                                       (fn matches-tag-with-attr [xml-tree]

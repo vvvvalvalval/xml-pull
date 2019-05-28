@@ -65,11 +65,11 @@
 
 (defn to-tag-with-attr
   "A Path that navigates to children of the current element having the given tag, and a specific value for a given attribute."
-  [tag attr-kw attr-value & clauses]
+  [tag attr-name attr-value & clauses]
   (to-tag-path
     {:xml-pull.path/type :xml-pull.path-type/content-tag-with-attr
      :xml-pull.path/tag tag
-     :xml-pull.path/attr attr-kw
+     :xml-pull.path/attr attr-name
      :xml-pull.path/attr-value attr-value}
     clauses))
 
@@ -110,10 +110,10 @@
 (defn to-attr
   "A Path that navigates to the value of an attribute of the current XML element.
   The default `:xml-pull.path/key` is the name of the attribute."
-  [attr-kw & clauses]
+  [attr-name & clauses]
   (reduce merge
     {:xml-pull.path/type :xml-pull.path-type/attr,
-     :xml-pull.path/attr attr-kw}
+     :xml-pull.path/attr attr-name}
     clauses))
 
 (defn to-tag-content-1

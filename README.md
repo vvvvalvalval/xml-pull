@@ -70,20 +70,20 @@ You do so by defining a _query_ for extracting the desired information.
  DSL provided by xml-pull:
 
 ```clojure
-(require '[xml-pull.query-dsl :as xpd]
+(require '[xml-pull.query-dsl :as xpd])
 
 (def person-info-query
   (xpd/query
-    [(xpd/to-attr :id (xpd/as-key :person/id))
-     (xpd/to-tag-content-1 :first-name :person/first-name)
-     (xpd/to-tag-content-1 :first-name :person/last-name)
-     (xpd/to-tag :contact-infos xpd/no-key
-       [(xpd/to-tag-with-attr :contact-info :type "email" xpd/no-key
+    [(xpd/to-attr "id" (xpd/as-key :person/id))
+     (xpd/to-tag-content-1 "first-name" :person/first-name)
+     (xpd/to-tag-content-1 "last-name" :person/last-name)
+     (xpd/to-tag "contact-infos" xpd/no-key
+       [(xpd/to-tag-with-attr "contact-info" "type" "email" xpd/no-key
           [(xpd/to-content-1 (xpd/as-key :person/email))])
-        (xpd/to-tag-with-attr :contact-info :type "phone-number" xpd/no-key
+        (xpd/to-tag-with-attr "contact-info" "type" "phone-number" xpd/no-key
           [(xpd/to-content-1 (xpd/as-key :person/phone-number))])])
-     (xpd/to-tag :hobbies xpd/no-key
-       [(xpd/to-tag :hobby xpd/tag-many (xpd/as-key :person/hobbies)
+     (xpd/to-tag "hobbies" xpd/no-key
+       [(xpd/to-tag "hobby" xpd/tag-many (xpd/as-key :person/hobbies)
           [(xpd/to-content-1 (xpd/as-key :hobby/name))]
           (xpd/post-process #(mapv :hobby/name %)))])]))
 ```
@@ -123,46 +123,46 @@ For transparency, here's the `person-info-query` query we defined with the DSL:
 ```clojure
 person-info-query
 =>
-#:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/attr, :attr :id, :key :person/id}
+#:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/attr, :attr "id", :key :person/id}
                          #:xml-pull.path{:type :xml-pull.path-type/content-tag,
-                                         :tag :first-name,
+                                         :tag "first-name",
                                          :no-key true,
                                          :query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-1,
                                                                                          :key :person/first-name}]}}
                          #:xml-pull.path{:type :xml-pull.path-type/content-tag,
-                                         :tag :first-name,
+                                         :tag "last-name",
                                          :no-key true,
                                          :query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-1,
                                                                                          :key :person/last-name}]}}
                          #:xml-pull.path{:type :xml-pull.path-type/content-tag,
-                                         :tag :contact-infos,
+                                         :tag "contact-infos",
                                          :no-key true,
                                          :query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-tag-with-attr,
-                                                                                         :tag :contact-info,
-                                                                                         :attr :type,
+                                                                                         :tag "contact-info",
+                                                                                         :attr "type",
                                                                                          :attr-value "email",
                                                                                          :no-key true,
                                                                                          :query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-1,
                                                                                                                                          :key :person/email}]}}
                                                                          #:xml-pull.path{:type :xml-pull.path-type/content-tag-with-attr,
-                                                                                         :tag :contact-info,
-                                                                                         :attr :type,
+                                                                                         :tag "contact-info",
+                                                                                         :attr "type",
                                                                                          :attr-value "phone-number",
                                                                                          :no-key true,
                                                                                          :query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-1,
                                                                                                                                          :key :person/phone-number}]}}]}}
                          #:xml-pull.path{:type :xml-pull.path-type/content-tag,
-                                         :tag :hobbies,
+                                         :tag "hobbies",
                                          :no-key true,
                                          :query #:xml-pull.query{:paths [{:xml-pull.path/type :xml-pull.path-type/content-tag,
-                                                                          :xml-pull.path/tag :hobby,
+                                                                          :xml-pull.path/tag "hobby",
                                                                           :xml-pull.tag/cardinality :tag.cardinality/many,
                                                                           :xml-pull.path/key :person/hobbies,
                                                                           :xml-pull.path/query #:xml-pull.query{:paths [#:xml-pull.path{:type :xml-pull.path-type/content-1,
                                                                                                                                         :key :hobby/name}]},
-                                                                          :xml-pull/post-process-fn #object[xml_pull.query_test$fn__2060
-                                                                                                            0x534b9e3f
-                                                                                                            "xml_pull.query_test$fn__2060@534b9e3f"]}]}}]}
+                                                                          :xml-pull/post-process-fn #object[xml_pull.query_test$fn__2449
+                                                                                                            0x51731b6a
+                                                                                                            "xml_pull.query_test$fn__2449@51731b6a"]}]}}]}
 ```
 
 ## License
