@@ -68,8 +68,8 @@
     (let [pull (xpe/compile-query
                  {}
                  (xpd/query
-                   [(xpd/to-tag :contact-infos xpd/no-key
-                      [(xpd/to-tag :contact-info xpd/no-key
+                   [(xpd/to-tag "contact-infos" xpd/no-key
+                      [(xpd/to-tag "contact-info" xpd/no-key
                          [(xpd/to-content-1 (xpd/as-key :person/contact))])])]))]
       (is
         (reports-error-type?
