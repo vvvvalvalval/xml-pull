@@ -1,0 +1,10 @@
+{:paths ["src"]
+ :deps {}
+ :aliases
+ {:test
+  {:extra-paths ["test" "test-resources"]
+   :extra-deps {org.clojure/data.xml {:mvn/version "0.0.8"}}}
+  :bench
+  {:extra-deps
+   {com.clojure-goes-fast/clj-async-profiler {:mvn/version "0.3.1"}
+    criterium {:mvn/version "0.4.5"}}}}}

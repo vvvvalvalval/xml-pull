@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person id="a9b051d2-4499-484d-a0eb-f4f672f88180">
+    <first-name>John</first-name>
+    <last-name>Doe</last-name>
+    <contact-infos>
+        <contact-info type="email">john.doe@yahoo.com</contact-info>
+        <contact-info type="phone-number">+33 4 56 09 12 88</contact-info>
+    </contact-infos>
+    <hobbies>
+        <hobby>Guitar</hobby>
+        <hobby>Rock-climbing</hobby>
+        <hobby>Gardening</hobby>
+    </hobbies>
+    <address>
+        <city>Babylon</city>
+    </address>
+</person>

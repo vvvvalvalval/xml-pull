@@ -1,0 +1,8 @@
+test-resources/bench-data
+
+# IntelliJ project files
+.idea
+*.iml
+
+# Deps.edn
+.cpcache
